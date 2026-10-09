@@ -78,27 +78,40 @@ public class goodOrderExample {
 
 
         }
+        class visa implements payment_method{
+            @Override
+            public void pay() {
+                System.out.println("Processing visa card payments...");
+            }
+        }
+        class masterCard implements payment_method{
+            @Override
+            public void pay() {
+                System.out.println("Processing master card payments...");
+            }
+        }
+        class americanExpress implements payment_method{
+            @Override
+            public void pay() {
+                System.out.println("Processing american express card payments...");
+            }
+        }
     static class OrderManager {
-
-        public void processOrder(BadOrderExample.Order order) {
+       payment_method payment_method;
+       OrderManager(payment_method payment_method){
+           this.payment_method=payment_method;
+       }
+        public void processOrder(goodOrderExample.Order order) {
             System.out.println("Processing order: " + order.getName() + " now...");
         }
 
-        public void processPayment(BadOrderExample.Order order, BadOrderExample.Payment payment) {
+        public void processPayment(goodOrderExample.Order order, goodOrderExample.Payment payment) {
             System.out.println("Processing payment of order: " + order.getName());
             System.out.println("Issuing payment for amount: " + order.getTotalPrice());
-            if (payment.getType().equalsIgnoreCase("VISA")) {
-                System.out.println("Processing visa card payments...");
-            } else if (payment.getType().equalsIgnoreCase("MASTER_CARD")) {
-                System.out.println("Processing master card payments...");
-            } else if (payment.getType().equalsIgnoreCase("AMERICAN_EXPRESS")) {
-                System.out.println("Processing american express card payments...");
-            } else {
-                throw new UnsupportedOperationException("Un supported payment...");
-            }
+            payment_method.pay();
         }
 
-        void sendEmailNotification(BadOrderExample.Customer customer, String message) {
+        void sendEmailNotification(goodOrderExample.Customer customer, String message) {
             System.out.println("Sending email notification to: " + customer.getEmail()
                     + " with message: " + message);
         }
