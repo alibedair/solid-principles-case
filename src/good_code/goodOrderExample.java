@@ -116,6 +116,20 @@ public class goodOrderExample {
                     + " with message: " + message);
         }
     }
+    static class Subscriber implements subscribtion,registration {
+
+
+        @Override
+        public void register(String name) {
+            System.out.println(name + " registered");
+        }
+
+        @Override
+        public void subscribe(String name) {
+            System.out.println(name + " subscribed to newsletter");
+        }
+    }
+
 
 
     }
